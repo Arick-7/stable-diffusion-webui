@@ -1,0 +1,60 @@
+@startuml
+!theme plain
+title 建筑AI辅助策划与设计系统工作流程
+
+' 样式定义
+skinparam activity {
+    BackgroundColor lightblue
+    BorderColor black
+    FontSize 12
+}
+
+skinparam activityDiamond {
+    BackgroundColor lightyellow
+    BorderColor black
+}
+
+skinparam note {
+    BackgroundColor lightgreen
+    BorderColor darkgreen
+}
+
+start
+
+partition "数据输入阶段" {
+    :收集既往建筑项目策划书;
+    :收集项目任务书;
+    :获取国家建设标准;
+    :获取地方建设标准;
+}
+
+partition "AI分析处理阶段" {
+    :建筑大语言模型加载;
+    :多源数据融合分析;
+    :启动对话式交互;
+}
+
+partition "智能生成阶段" {
+    :快速生成策划书草案;
+    :生成设计任务书;
+    :识别关键性能指标;
+    :明确项目目标和需求;
+}
+
+partition "输出优化阶段" {
+    :为设计师提供清晰方向;
+    :识别技术挑战点;
+    :生成针对性解决方案;
+}
+
+partition "价值实现阶段" {
+    :降低认知负荷;
+    :提高工作效率;
+    :优化设计质量;
+}
+
+stop
+note top
+    系统通过AI技术整合多源建筑信息，实现智能化的项目策划与设计辅助
+end note
+@enduml

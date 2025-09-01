@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用例图</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .code-section {
+            margin: 20px 0;
+        }
+        .code-block {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.4;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        .btn {
+            background: #3498db;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 25px;
+            display: inline-block;
+            margin: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .btn-copy {
+            background: #27ae60;
+        }
+        .btn-copy:hover {
+            background: #219a52;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 用例图</h1>
+        
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="http://www.plantuml.com/plantuml/uml/" target="_blank" class="btn">
+                🌐 PlantUML在线编辑器
+            </a>
+            <button class="btn btn-copy" onclick="copyToClipboard()">
+                📋 复制代码
+            </button>
+        </div>
+        
+        <div class="code-section">
+            <h3>PlantUML代码：</h3>
+            <div class="code-block" id="plantuml-code">@startuml
+!theme plain
+title 建筑AI系统用例图
+
+left to right direction
+
+actor "建筑师" as Architect
+actor "项目经理" as PM
+actor "业主" as Owner
+
+rectangle "建筑AI辅助设计系统" {
+    usecase "上传项目信息" as UC1
+    usecase "生成策划书" as UC2  
+    usecase "生成任务书" as UC3
+    usecase "识别关键指标" as UC4
+    usecase "技术挑战分析" as UC5
+    usecase "导出文档" as UC6
+    usecase "查看历史项目" as UC7
+    usecase "标准合规检查" as UC8
+}
+
+' 用例关系
+Architect --> UC1
+Architect --> UC2
+Architect --> UC3
+PM --> UC4
+PM --> UC5
+Owner --> UC6
+Architect --> UC7
+Architect --> UC8
+
+' 包含关系
+UC2 .> UC4 : <<include>>
+UC3 .> UC4 : <<include>>
+UC2 .> UC8 : <<include>>
+UC3 .> UC8 : <<include>>
+
+' 扩展关系
+UC5 .> UC2 : <<extend>>
+
+note right of UC4
+    关键指标包括：
+    - 能耗性能
+    - 可持续性
+    - 舒适度
+    - 经济性
+end note
+
+@enduml</div>
+        </div>
+        
+        <div style="margin-top: 30px;">
+            <h3>使用说明：</h3>
+            <ol>
+                <li>点击"复制代码"按钮复制PlantUML代码</li>
+                <li>打开PlantUML在线编辑器</li>
+                <li>粘贴代码并查看生成的图表</li>
+                <li>可以导出为PNG、SVG等格式</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        function copyToClipboard() {
+            const codeElement = document.getElementById('plantuml-code');
+            const text = codeElement.textContent;
+            
+            navigator.clipboard.writeText(text).then(function() {
+                alert('代码已复制到剪贴板！');
+            }, function(err) {
+                console.error('复制失败: ', err);
+                // 备用复制方法
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                alert('代码已复制到剪贴板！');
+            });
+        }
+    </script>
+</body>
+</html>

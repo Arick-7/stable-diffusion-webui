@@ -1,0 +1,49 @@
+@startuml
+!theme plain
+title 建筑AI系统用例图
+
+left to right direction
+
+actor "建筑师" as Architect
+actor "项目经理" as PM
+actor "业主" as Owner
+
+rectangle "建筑AI辅助设计系统" {
+    usecase "上传项目信息" as UC1
+    usecase "生成策划书" as UC2  
+    usecase "生成任务书" as UC3
+    usecase "识别关键指标" as UC4
+    usecase "技术挑战分析" as UC5
+    usecase "导出文档" as UC6
+    usecase "查看历史项目" as UC7
+    usecase "标准合规检查" as UC8
+}
+
+' 用例关系
+Architect --> UC1
+Architect --> UC2
+Architect --> UC3
+PM --> UC4
+PM --> UC5
+Owner --> UC6
+Architect --> UC7
+Architect --> UC8
+
+' 包含关系
+UC2 .> UC4 : <<include>>
+UC3 .> UC4 : <<include>>
+UC2 .> UC8 : <<include>>
+UC3 .> UC8 : <<include>>
+
+' 扩展关系
+UC5 .> UC2 : <<extend>>
+
+note right of UC4
+    关键指标包括：
+    - 能耗性能
+    - 可持续性
+    - 舒适度
+    - 经济性
+end note
+
+@enduml

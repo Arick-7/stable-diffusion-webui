@@ -1,0 +1,37 @@
+@startuml
+!theme plain
+title 简单工作流程
+
+' 样式定义
+skinparam activity {
+    BackgroundColor lightblue
+    BorderColor black
+    FontSize 12
+}
+
+skinparam activityDiamond {
+    BackgroundColor lightyellow
+    BorderColor black
+}
+
+skinparam note {
+    BackgroundColor lightgreen
+    BorderColor darkgreen
+}
+
+start
+
+:开始工作;
+note right: 准备阶段
+
+:执行任务;
+note right: 核心工作
+
+:检查结果;
+note right: 质量控制
+
+:完成工作;
+note right: 结束阶段
+
+stop
+@enduml

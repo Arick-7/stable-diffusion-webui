@@ -1,0 +1,86 @@
+@startuml
+!theme plain
+title 建筑AI辅助设计完整流程
+
+' 样式定义
+skinparam activity {
+    BackgroundColor lightblue
+    BorderColor black
+    FontSize 12
+}
+
+skinparam activityDiamond {
+    BackgroundColor lightyellow
+    BorderColor black
+}
+
+skinparam note {
+    BackgroundColor lightgreen
+    BorderColor darkgreen
+}
+
+start
+
+partition "数据输入阶段" #LIGHTBLUE {
+    :收集既往建筑项目策划书;
+    :收集项目任务书;
+    :获取国家建设标准;
+    :获取地方建设标准;
+}
+
+partition "AI分析处理阶段" #LIGHTGREEN {
+    :建筑大语言模型加载;
+    :多源数据融合分析;
+}
+
+partition "智能生成阶段" #LIGHTYELLOW {
+    :快速生成策划书草案;
+    :生成设计任务书;
+    :识别关键性能指标;
+    :明确项目目标和需求;
+}
+
+partition "输出优化阶段" #LIGHTCORAL {
+    :为设计师提供清晰方向;
+    :识别技术挑战点;
+    :生成针对性解决方案;
+}
+
+partition "价值实现阶段" #LIGHTPINK {
+    :降低认知负荷;
+    :提高工作效率;
+    :优化设计质量;
+}
+
+if (数据完整性检查) then (是)
+    :启动对话式交互;
+    note right: 数据充足，可以继续
+else (否)
+    :请求补充信息;
+    note right: 缺少关键信息
+endif
+
+if (质量检查通过？) then (是)
+    :生成最终文档;
+    note right: 达到质量标准
+else (否)
+    :返回优化建议;
+    note right: 需要进一步改进
+endif
+
+fork
+    :能耗性能分析;
+fork again
+    :可持续性评估;
+fork again
+    :舒适度指标设定;
+fork again
+    :经济性指标计算;
+end fork
+
+stop
+note top
+    系统通过AI技术整合多源建筑信息，实现智能化的项目策划与设计辅助。
+核心价值：快速响应、标准合规、经验复用、智能预判、减负增效
+end note
+@enduml
