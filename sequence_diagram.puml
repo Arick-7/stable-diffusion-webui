@@ -1,0 +1,86 @@
+@startuml
+!theme plain
+title 建筑AI系统交互序列图
+
+' 参与者定义
+actor "建筑师" as Architect #lightblue
+participant "AI系统" as AI #lightgreen
+database "项目数据库" as ProjectDB #lightyellow
+participant "标准API" as StandardAPI #lightcoral
+participant "文档生成器" as DocGen #lightgray
+
+' 激活生命线
+activate Architect
+activate AI
+
+== 项目信息收集阶段 ==
+
+Architect -> AI: 上传项目基本信息
+note right: 包含项目类型、位置、规模等
+
+AI -> ProjectDB: 查询相似历史项目
+activate ProjectDB
+ProjectDB --> AI: 返回匹配的项目数据
+deactivate ProjectDB
+
+AI -> StandardAPI: 获取适用建设标准
+activate StandardAPI
+StandardAPI --> AI: 返回国家和地方标准
+deactivate StandardAPI
+
+== 智能对话阶段 ==
+
+AI -> Architect: 生成专业问题清单
+note left
+    基于缺失信息生成：
+    - 功能需求问题
+    - 技术约束条件
+    - 预算和时间限制
+end note
+
+Architect -> AI: 回答项目需求问题
+
+AI -> AI: 分析需求和约束条件
+note right: 使用大语言模型进行智能分析
+
+== 文档生成阶段 ==
+
+AI -> DocGen: 请求生成策划书
+activate DocGen
+
+DocGen -> DocGen: 基于模板生成文档
+DocGen --> AI: 返回策划书草案
+deactivate DocGen
+
+AI -> DocGen: 请求生成任务书
+activate DocGen
+DocGen --> AI: 返回设计任务书
+deactivate DocGen
+
+== 质量检查与优化 ==
+
+AI -> AI: 执行质量检查
+alt 质量达标
+    AI -> Architect: 提供完整策划方案
+    note right: 包含所有必要文档和指标
+else 需要优化
+    AI -> AI: 生成优化建议
+    AI -> Architect: 返回改进建议
+    Architect -> AI: 确认修改要求
+end
+
+== 最终交付 ==
+
+AI -> Architect: 交付最终文档包
+note left
+    交付内容：
+    ✓ 项目策划书PDF
+    ✓ 设计任务书PDF  
+    ✓ 关键指标清单
+    ✓ 技术挑战应对方案
+end note
+
+deactivate AI
+deactivate Architect
+
+@enduml

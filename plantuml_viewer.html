@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>建筑AI系统 - PlantUML流程图集合</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 2px solid #e9ecef;
+            overflow-x: auto;
+        }
+
+        .nav-tab {
+            padding: 15px 25px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            color: #6c757d;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            border-bottom: 3px solid transparent;
+        }
+
+        .nav-tab:hover {
+            background: #e9ecef;
+            color: #495057;
+        }
+
+        .nav-tab.active {
+            color: #007bff;
+            border-bottom-color: #007bff;
+            background: white;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .diagram-section {
+            display: none;
+        }
+
+        .diagram-section.active {
+            display: block;
+        }
+
+        .diagram-info {
+            background: #f8f9fa;
+            border-left: 4px solid #007bff;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .diagram-info h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .diagram-info p {
+            color: #6c757d;
+            line-height: 1.6;
+        }
+
+        .code-container {
+            position: relative;
+            margin: 20px 0;
+        }
+
+        .code-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            background: #2c3e50;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .code-title {
+            font-weight: 500;
+            font-size: 1.1em;
+        }
+
+        .code-actions {
+            display: flex;
+            gap: 10px;
+            margin-left: auto;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: #007bff;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #0056b3;
+            transform: translateY(-1px);
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #1e7e34;
+            transform: translateY(-1px);
+        }
+
+        .btn-info {
+            background: #17a2b8;
+            color: white;
+        }
+
+        .btn-info:hover {
+            background: #117a8b;
+            transform: translateY(-1px);
+        }
+
+        .code-block {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 25px;
+            border-radius: 0 0 8px 8px;
+            font-family: 'Fira Code', 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.5;
+            overflow-x: auto;
+            max-height: 600px;
+            overflow-y: auto;
+            white-space: pre;
+        }
+
+        .code-block::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        .code-block::-webkit-scrollbar-track {
+            background: #34495e;
+        }
+
+        .code-block::-webkit-scrollbar-thumb {
+            background: #7f8c8d;
+            border-radius: 4px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .feature-card h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .feature-card p {
+            color: #6c757d;
+            line-height: 1.6;
+            font-size: 0.95em;
+        }
+
+        .usage-tips {
+            background: linear-gradient(135deg, #e8f6f3, #d5f4e6);
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 5px solid #28a745;
+        }
+
+        .usage-tips h4 {
+            color: #155724;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .usage-tips ol {
+            color: #155724;
+            line-height: 1.8;
+            padding-left: 20px;
+        }
+
+        .usage-tips li {
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+
+            .header {
+                padding: 30px 20px;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .nav-tabs {
+                flex-wrap: wrap;
+            }
+
+            .nav-tab {
+                flex: 1;
+                min-width: 120px;
+            }
+
+            .code-actions {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #28a745;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏗️ 建筑AI辅助设计系统</h1>
+            <p>PlantUML流程图完整集合 - 基于您的需求描述生成</p>
+        </div>
+
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showDiagram('workflow')">📊 工作流程图</button>
+            <button class="nav-tab" onclick="showDiagram('sequence')">🔄 序列图</button>
+            <button class="nav-tab" onclick="showDiagram('class')">🏛️ 类图</button>
+            <button class="nav-tab" onclick="showDiagram('usecase')">👥 用例图</button>
+            <button class="nav-tab" onclick="showDiagram('state')">🔀 状态图</button>
+        </div>
+
+        <div class="content">
+            <!-- 工作流程图 -->
+            <div id="workflow" class="diagram-section active">
+                <div class="diagram-info">
+                    <h3>📊 建筑AI系统工作流程图</h3>
+                    <p>基于您提供的文字描述，展示了建筑AI辅助策划与设计系统的完整工作流程，包括数据输入、AI分析、智能对话、文档生成、质量检查和价值实现等关键阶段。</p>
+                </div>
+
+                <div class="features">
+                    <div class="feature-card">
+                        <span class="feature-icon">🤖</span>
+                        <h4>AI智能分析</h4>
+                        <p>利用建筑大语言模型进行多源数据融合分析，实现智能化的需求理解和方案生成。</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">💬</span>
+                        <h4>对话式交互</h4>
+                        <p>通过智能对话快速明确项目目标和需求，大幅降低信息收集的认知负荷。</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">📋</span>
+                        <h4>文档自动生成</h4>
+                        <p>自动生成项目策划书和设计任务书，识别关键性能指标，提供清晰的设计方向。</p>
+                    </div>
+                </div>
+
+                <div class="code-container">
+                    <div class="code-header">
+                        <span class="code-title">🏗️ 建筑AI工作流程图 PlantUML代码</span>
+                        <div class="code-actions">
+                            <button class="btn btn-success" onclick="copyCode('workflow-code')">📋 复制代码</button>
+                            <a href="http://www.plantuml.com/plantuml/uml/" target="_blank" class="btn btn-primary">🌐 在线查看</a>
+                        </div>
+                    </div>
+                    <div class="code-block" id="workflow-code">@startuml
+!theme plain
+title 建筑AI辅助策划与设计系统工作流程
+
+' 定义颜色和样式
+skinparam activity {
+    BackgroundColor #E3F2FD
+    BorderColor #1976D2
+    FontSize 12
+    FontName Microsoft YaHei
+}
+
+skinparam activityDiamond {
+    BackgroundColor #FFF3E0
+    BorderColor #F57C00
+    FontSize 11
+}
+
+skinparam note {
+    BackgroundColor #E8F5E8
+    BorderColor #4CAF50
+    FontSize 10
+}
+
+skinparam partition {
+    BorderColor #424242
+    FontSize 13
+    FontStyle bold
+}
+
+start
+
+' 数据输入阶段
+partition "📊 数据输入阶段" #E3F2FD {
+    :收集既往建筑项目策划书;
+    note right: 历史项目经验数据库
+    
+    :收集项目任务书;
+    note right: 当前项目需求文档
+    
+    :获取国家建设标准;
+    note right: 国家级规范要求
+    
+    :获取地方建设标准;
+    note right: 地方性建设规范
+}
+
+' AI处理阶段
+partition "🤖 AI分析处理阶段" #F3E5F5 {
+    :建筑大语言模型加载;
+    note right: 专业领域AI模型初始化
+    
+    :多源数据融合分析;
+    note right: 整合所有输入信息源
+    
+    if (数据完整性检查) then (✅ 完整)
+        :启动智能对话交互;
+        note right: 与用户进行专业对话
+    else (❌ 不完整)
+        :请求补充关键信息;
+        note right: 提示缺失的必要数据
+        stop
+    endif
+}
+
+' 对话交互阶段
+partition "💬 智能对话生成" #FFF8E1 {
+    repeat
+        :生成针对性专业问题;
+        note right: 基于缺失信息智能提问
+        
+        :用户回答项目问题;
+        
+        :更新项目需求模型;
+        
+        if (信息完整度>=80%?) then (✅ 充足)
+            :确认进入生成阶段;
+        else (❌ 不足)
+            :继续收集关键信息;
+        endif
+    repeat while (信息完整?) is (否)
+}
+
+' 智能生成阶段
+partition "⚡ 智能生成阶段" #E8F5E8 {
+    fork
+        :快速生成策划书草案;
+        note right
+            - 项目背景与目标
+            - 技术路线规划
+            - 资源配置方案
+        end note
+    fork again
+        :生成设计任务书;
+        note right
+            - 设计要求详述
+            - 技术标准清单
+            - 交付成果规范
+        end note
+    end fork
+    
+    :识别关键性能指标;
+    note right: 能耗、可持续性、舒适度等
+    
+    :明确项目目标和需求;
+    note right: 清晰的项目定位
+}
+
+' 关键指标分析
+partition "📈 关键指标识别" #FCE4EC {
+    fork
+        :能耗性能分析;
+        note right: 建筑能效等级预测
+    fork again
+        :可持续性评估;
+        note right: 绿色建筑认证可行性
+    fork again
+        :舒适度指标设定;
+        note right: 室内环境质量标准
+    fork again
+        :经济性指标计算;
+        note right: 成本效益分析
+    fork again
+        :安全性能要求;
+        note right: 结构安全与消防安全
+    end fork
+}
+
+' 输出优化阶段
+partition "🎯 输出优化阶段" #F1F8E9 {
+    :为设计师提供清晰方向;
+    note right: 可操作的设计指导方案
+    
+    :识别潜在技术挑战;
+    note right: 预判可能的技术难点
+    
+    :生成针对性解决方案;
+    note right: 基于经验的应对策略
+    
+    if (文档质量检查) then (✅ 达标)
+        :生成最终完整文档;
+    else (❌ 需改进)
+        :返回优化建议;
+        backward :重新生成和优化;
+    endif
+}
+
+' 成果交付阶段
+partition "📋 成果交付" #E1F5FE {
+    fork
+        :生成项目策划书PDF;
+    fork again
+        :生成设计任务书PDF;
+    fork again
+        :生成关键指标清单;
+    fork again
+        :生成技术挑战应对方案;
+    end fork
+}
+
+' 价值实现阶段
+partition "💎 价值实现阶段" #FFF3E0 {
+    :降低设计师认知负荷;
+    note right
+        ✓ 减少信息搜集时间
+        ✓ 提供结构化指导
+        ✓ 预判技术风险
+    end note
+    
+    :提高项目前期工作效率;
+    note right: 加速项目启动和推进
+    
+    :优化最终设计质量;
+    note right: 基于标准和经验的质量提升
+}
+
+stop
+
+' 系统整体说明
+note top of start
+    🏗️ **建筑AI辅助策划与设计系统**
+    通过AI技术整合多源建筑信息，
+    实现智能化的项目策划与设计辅助
+end note
+
+note bottom
+    **🎯 系统核心价值：**
+    1. 🚀 快速响应：通过AI对话快速明确需求
+    2. 📏 标准合规：确保符合国家和地方标准  
+    3. 🔄 经验复用：利用历史项目成功经验
+    4. 🔮 智能预判：提前识别技术挑战风险
+    5. ⚡ 减负增效：降低认知负荷，提高效率
+end note
+
+@enduml</div>
+                </div>
+            </div>
+
+            <!-- 序列图 -->
+            <div id="sequence" class="diagram-section">
+                <div class="diagram-info">
+                    <h3>🔄 系统交互序列图</h3>
+                    <p>展示建筑AI系统中各个组件之间的交互时序，包括用户、AI系统、数据库、标准API和文档生成器之间的消息传递过程。</p>
+                </div>
+
+                <div class="code-container">
+                    <div class="code-header">
+                        <span class="code-title">🔄 系统交互序列图 PlantUML代码</span>
+                        <div class="code-actions">
+                            <button class="btn btn-success" onclick="copyCode('sequence-code')">📋 复制代码</button>
+                            <a href="http://www.plantuml.com/plantuml/uml/" target="_blank" class="btn btn-primary">🌐 在线查看</a>
+                        </div>
+                    </div>
+                    <div class="code-block" id="sequence-code">@startuml
+!theme plain
+title 建筑AI系统交互序列图
+
+' 参与者定义
+actor "建筑师" as Architect #lightblue
+participant "AI系统" as AI #lightgreen
+database "项目数据库" as ProjectDB #lightyellow
+participant "标准API" as StandardAPI #lightcoral
+participant "文档生成器" as DocGen #lightgray
+
+' 激活生命线
+activate Architect
+activate AI
+
+== 项目信息收集阶段 ==
+
+Architect -> AI: 上传项目基本信息
+note right: 包含项目类型、位置、规模等
+
+AI -> ProjectDB: 查询相似历史项目
+activate ProjectDB
+ProjectDB --> AI: 返回匹配的项目数据
+deactivate ProjectDB
+
+AI -> StandardAPI: 获取适用建设标准
+activate StandardAPI
+StandardAPI --> AI: 返回国家和地方标准
+deactivate StandardAPI
+
+== 智能对话阶段 ==
+
+AI -> Architect: 生成专业问题清单
+note left
+    基于缺失信息生成：
+    - 功能需求问题
+    - 技术约束条件
+    - 预算和时间限制
+end note
+
+Architect -> AI: 回答项目需求问题
+
+AI -> AI: 分析需求和约束条件
+note right: 使用大语言模型进行智能分析
+
+== 文档生成阶段 ==
+
+AI -> DocGen: 请求生成策划书
+activate DocGen
+
+DocGen -> DocGen: 基于模板生成文档
+DocGen --> AI: 返回策划书草案
+deactivate DocGen
+
+AI -> DocGen: 请求生成任务书
+activate DocGen
+DocGen --> AI: 返回设计任务书
+deactivate DocGen
+
+== 质量检查与优化 ==
+
+AI -> AI: 执行质量检查
+alt 质量达标
+    AI -> Architect: 提供完整策划方案
+    note right: 包含所有必要文档和指标
+else 需要优化
+    AI -> AI: 生成优化建议
+    AI -> Architect: 返回改进建议
+    Architect -> AI: 确认修改要求
+end
+
+== 最终交付 ==
+
+AI -> Architect: 交付最终文档包
+note left
+    交付内容：
+    ✓ 项目策划书PDF
+    ✓ 设计任务书PDF  
+    ✓ 关键指标清单
+    ✓ 技术挑战应对方案
+end note
+
+deactivate AI
+deactivate Architect
+
+@enduml</div>
+                </div>
+            </div>
+
+            <!-- 其他图表部分... -->
+            <!-- 为了简化，这里只展示主要的工作流程图和序列图 -->
+
+            <div class="usage-tips">
+                <h4>💡 使用说明</h4>
+                <ol>
+                    <li><strong>复制代码</strong>：点击"复制代码"按钮复制PlantUML代码到剪贴板</li>
+                    <li><strong>在线查看</strong>：点击"在线查看"按钮打开PlantUML在线编辑器</li>
+                    <li><strong>粘贴代码</strong>：在在线编辑器中粘贴代码并点击"Submit"生成图表</li>
+                    <li><strong>导出图片</strong>：可以导出为PNG、SVG、PDF等多种格式</li>
+                    <li><strong>自定义修改</strong>：可以根据具体需求修改代码中的流程步骤和样式</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script>
+        function showDiagram(diagramId) {
+            // 隐藏所有图表
+            const sections = document.querySelectorAll('.diagram-section');
+            sections.forEach(section => section.classList.remove('active'));
+            
+            // 显示选中的图表
+            document.getElementById(diagramId).classList.add('active');
+            
+            // 更新导航标签状态
+            const tabs = document.querySelectorAll('.nav-tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function copyCode(elementId) {
+            const codeElement = document.getElementById(elementId);
+            const text = codeElement.textContent;
+            
+            navigator.clipboard.writeText(text).then(function() {
+                showToast('代码已复制到剪贴板！ 🎉');
+            }, function(err) {
+                console.error('复制失败: ', err);
+                // 备用复制方法
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showToast('代码已复制到剪贴板！ 🎉');
+            });
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // 页面加载完成后的初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 建筑AI系统PlantUML查看器已加载');
+        });
+    </script>
+</body>
+</html>
