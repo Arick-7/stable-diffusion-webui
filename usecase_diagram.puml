@@ -1,0 +1,134 @@
+@startuml
+!theme plain
+title 建筑AI辅助设计系统用例图
+
+' 设置布局方向
+left to right direction
+
+' 定义参与者
+actor "建筑师" as Architect #lightblue
+actor "项目经理" as PM #lightgreen
+actor "业主" as Owner #lightyellow
+actor "审查专家" as Expert #lightcoral
+
+' 系统边界
+rectangle "建筑AI辅助设计系统" {
+    ' 主要用例
+    usecase "上传项目信息" as UC1 #E3F2FD
+    usecase "智能对话交互" as UC2 #F3E5F5
+    usecase "生成策划书" as UC3 #E8F5E8
+    usecase "生成任务书" as UC4 #FFF8E1
+    usecase "识别关键指标" as UC5 #FCE4EC
+    usecase "技术挑战分析" as UC6 #F1F8E9
+    usecase "导出文档" as UC7 #E1F5FE
+    usecase "查看历史项目" as UC8 #FFF3E0
+    usecase "标准合规检查" as UC9 #EFEBE9
+    usecase "质量审核" as UC10 #F9FBE7
+    usecase "版本管理" as UC11 #FCE4EC
+    
+    ' 子用例
+    usecase "能耗分析" as UC5_1
+    usecase "可持续性评估" as UC5_2
+    usecase "舒适度评估" as UC5_3
+    usecase "经济性分析" as UC5_4
+    
+    usecase "风险识别" as UC6_1
+    usecase "解决方案推荐" as UC6_2
+    
+    usecase "PDF导出" as UC7_1
+    usecase "Word导出" as UC7_2
+    usecase "Excel导出" as UC7_3
+}
+
+' 外部系统
+rectangle "外部系统" {
+    usecase "国家标准数据库" as EXT1 #FFEBEE
+    usecase "地方标准API" as EXT2 #FFEBEE
+    usecase "历史项目数据库" as EXT3 #FFEBEE
+}
+
+' 参与者与用例的关系
+Architect --> UC1 : 提供项目基础信息
+Architect --> UC2 : 进行专业对话
+Architect --> UC3 : 请求生成策划书
+Architect --> UC4 : 请求生成任务书
+Architect --> UC8 : 查阅相似项目
+
+PM --> UC5 : 制定关键指标
+PM --> UC6 : 分析技术风险
+PM --> UC10 : 进行质量检查
+PM --> UC11 : 管理文档版本
+
+Owner --> UC7 : 获取项目文档
+Owner --> UC3 : 审阅策划书
+Owner --> UC10 : 参与质量审核
+
+Expert --> UC9 : 执行合规检查
+Expert --> UC10 : 专家质量审核
+Expert --> UC6 : 技术风险评估
+
+' 用例之间的关系
+UC3 ..> UC5 : <<include>>
+UC4 ..> UC5 : <<include>>
+UC3 ..> UC9 : <<include>>
+UC4 ..> UC9 : <<include>>
+UC2 ..> UC1 : <<include>>
+
+UC6 ..> UC3 : <<extend>>
+UC6 ..> UC4 : <<extend>>
+UC10 ..> UC3 : <<extend>>
+UC10 ..> UC4 : <<extend>>
+
+' 子用例关系
+UC5 --> UC5_1
+UC5 --> UC5_2  
+UC5 --> UC5_3
+UC5 --> UC5_4
+
+UC6 --> UC6_1
+UC6 --> UC6_2
+
+UC7 --> UC7_1
+UC7 --> UC7_2
+UC7 --> UC7_3
+
+' 外部系统关系
+UC9 --> EXT1 : 查询国家标准
+UC9 --> EXT2 : 获取地方标准
+UC8 --> EXT3 : 访问历史数据
+
+' 注释说明
+note right of UC5
+    关键指标包括：
+    🔋 能耗性能指标
+    🌱 可持续性指标
+    🏠 舒适度指标
+    💰 经济性指标
+    🛡️ 安全性指标
+end note
+
+note left of UC6
+    技术挑战分析：
+    ⚠️ 识别潜在风险
+    💡 推荐解决方案
+    📊 风险等级评估
+    🎯 应对策略制定
+end note
+
+note bottom of UC2
+    智能对话功能：
+    🤖 AI驱动的专业对话
+    📝 动态问题生成
+    🧠 上下文理解
+    ✅ 信息完整性验证
+end note
+
+note top of UC9
+    标准合规检查：
+    📏 国家建设标准
+    🏛️ 地方规范要求
+    ✔️ 自动合规验证
+    📋 合规报告生成
+end note
+
+@enduml

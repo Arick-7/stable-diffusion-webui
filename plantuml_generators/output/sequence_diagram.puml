@@ -1,0 +1,17 @@
+@startuml
+!theme plain
+title 建筑AI系统交互序列图
+
+actor "用户" as User
+participant "AI系统" as AI
+database "数据库" as DB
+participant "标准API" as API
+
+User -> AI: 上传项目信息
+AI -> DB: 查询历史项目数据
+AI -> API: 获取建设标准
+AI -> User: 生成对话问题
+User -> AI: 回答问题
+AI -> AI: 分析需求
+AI -> User: 生成策划书
+@enduml

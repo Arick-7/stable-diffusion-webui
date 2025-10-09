@@ -1,0 +1,195 @@
+@startuml
+!theme plain
+title 建筑AI辅助策划与设计系统工作流程
+
+' 定义颜色和样式
+skinparam activity {
+    BackgroundColor #E3F2FD
+    BorderColor #1976D2
+    FontSize 12
+    FontName Microsoft YaHei
+}
+
+skinparam activityDiamond {
+    BackgroundColor #FFF3E0
+    BorderColor #F57C00
+    FontSize 11
+}
+
+skinparam note {
+    BackgroundColor #E8F5E8
+    BorderColor #4CAF50
+    FontSize 10
+}
+
+skinparam partition {
+    BorderColor #424242
+    FontSize 13
+    FontStyle bold
+}
+
+start
+
+' 数据输入阶段
+partition "📊 数据输入阶段" #E3F2FD {
+    :收集既往建筑项目策划书;
+    note right: 历史项目经验数据库
+    
+    :收集项目任务书;
+    note right: 当前项目需求文档
+    
+    :获取国家建设标准;
+    note right: 国家级规范要求
+    
+    :获取地方建设标准;
+    note right: 地方性建设规范
+}
+
+' AI处理阶段
+partition "🤖 AI分析处理阶段" #F3E5F5 {
+    :建筑大语言模型加载;
+    note right: 专业领域AI模型初始化
+    
+    :多源数据融合分析;
+    note right: 整合所有输入信息源
+    
+    if (数据完整性检查) then (✅ 完整)
+        :启动智能对话交互;
+        note right: 与用户进行专业对话
+    else (❌ 不完整)
+        :请求补充关键信息;
+        note right: 提示缺失的必要数据
+        stop
+    endif
+}
+
+' 对话交互阶段
+partition "💬 智能对话生成" #FFF8E1 {
+    repeat
+        :生成针对性专业问题;
+        note right: 基于缺失信息智能提问
+        
+        :用户回答项目问题;
+        
+        :更新项目需求模型;
+        
+        if (信息完整度>=80%?) then (✅ 充足)
+            :确认进入生成阶段;
+        else (❌ 不足)
+            :继续收集关键信息;
+        endif
+    repeat while (信息完整?) is (否)
+}
+
+' 智能生成阶段
+partition "⚡ 智能生成阶段" #E8F5E8 {
+    fork
+        :快速生成策划书草案;
+        note right
+            - 项目背景与目标
+            - 技术路线规划
+            - 资源配置方案
+        end note
+    fork again
+        :生成设计任务书;
+        note right
+            - 设计要求详述
+            - 技术标准清单
+            - 交付成果规范
+        end note
+    end fork
+    
+    :识别关键性能指标;
+    note right: 能耗、可持续性、舒适度等
+    
+    :明确项目目标和需求;
+    note right: 清晰的项目定位
+}
+
+' 关键指标分析
+partition "📈 关键指标识别" #FCE4EC {
+    fork
+        :能耗性能分析;
+        note right: 建筑能效等级预测
+    fork again
+        :可持续性评估;
+        note right: 绿色建筑认证可行性
+    fork again
+        :舒适度指标设定;
+        note right: 室内环境质量标准
+    fork again
+        :经济性指标计算;
+        note right: 成本效益分析
+    fork again
+        :安全性能要求;
+        note right: 结构安全与消防安全
+    end fork
+}
+
+' 输出优化阶段
+partition "🎯 输出优化阶段" #F1F8E9 {
+    :为设计师提供清晰方向;
+    note right: 可操作的设计指导方案
+    
+    :识别潜在技术挑战;
+    note right: 预判可能的技术难点
+    
+    :生成针对性解决方案;
+    note right: 基于经验的应对策略
+    
+    if (文档质量检查) then (✅ 达标)
+        :生成最终完整文档;
+    else (❌ 需改进)
+        :返回优化建议;
+        backward :重新生成和优化;
+    endif
+}
+
+' 成果交付阶段
+partition "📋 成果交付" #E1F5FE {
+    fork
+        :生成项目策划书PDF;
+    fork again
+        :生成设计任务书PDF;
+    fork again
+        :生成关键指标清单;
+    fork again
+        :生成技术挑战应对方案;
+    end fork
+}
+
+' 价值实现阶段
+partition "💎 价值实现阶段" #FFF3E0 {
+    :降低设计师认知负荷;
+    note right
+        ✓ 减少信息搜集时间
+        ✓ 提供结构化指导
+        ✓ 预判技术风险
+    end note
+    
+    :提高项目前期工作效率;
+    note right: 加速项目启动和推进
+    
+    :优化最终设计质量;
+    note right: 基于标准和经验的质量提升
+}
+
+stop
+
+' 系统整体说明
+note top of start
+    🏗️ **建筑AI辅助策划与设计系统**
+    通过AI技术整合多源建筑信息，
+    实现智能化的项目策划与设计辅助
+end note
+
+note bottom
+    **🎯 系统核心价值：**
+    1. 🚀 快速响应：通过AI对话快速明确需求
+    2. 📏 标准合规：确保符合国家和地方标准  
+    3. 🔄 经验复用：利用历史项目成功经验
+    4. 🔮 智能预判：提前识别技术挑战风险
+    5. ⚡ 减负增效：降低认知负荷，提高效率
+end note
+
+@enduml

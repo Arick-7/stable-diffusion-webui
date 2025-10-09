@@ -1,0 +1,22 @@
+@startuml
+!theme plain
+title 建筑AI系统交互序列图
+
+actor "建筑师" as Architect
+participant "AI系统" as AI
+database "项目数据库" as ProjectDB
+participant "标准API" as StandardAPI
+participant "文档生成器" as DocGen
+
+Architect -> AI: 上传项目基本信息
+AI -> ProjectDB: 查询相似历史项目
+ProjectDB -> AI: 返回项目数据
+AI -> StandardAPI: 获取适用建设标准
+StandardAPI -> AI: 返回标准规范
+AI -> Architect: 生成初步问题清单
+Architect -> AI: 回答项目需求问题
+AI -> AI: 分析需求和约束条件
+AI -> DocGen: 请求生成策划书
+DocGen -> AI: 返回策划书草案
+AI -> Architect: 提供完整策划方案
+@enduml

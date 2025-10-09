@@ -1,0 +1,194 @@
+@startuml
+!theme plain
+title 建筑AI系统架构类图
+
+' 样式定义
+skinparam class {
+    BackgroundColor #E3F2FD
+    BorderColor #1976D2
+    FontSize 12
+}
+
+skinparam interface {
+    BackgroundColor #F3E5F5
+    BorderColor #7B1FA2
+}
+
+' 核心系统类
+class BuildingAISystem {
+    - llmModel: LanguageModel
+    - projectDatabase: ProjectDatabase
+    - standardsAPI: StandardsAPI
+    - documentGenerator: DocumentGenerator
+    - kpiAnalyzer: KPIAnalyzer
+    --
+    + generatePlan(project: Project): Plan
+    + analyzeRequirements(input: String): Requirements
+    + identifyKPIs(project: Project): List<KPI>
+    + generateTaskDocument(plan: Plan): Document
+    + conductDialogue(question: String): String
+    + validateQuality(document: Document): Boolean
+}
+
+' 项目类
+class Project {
+    - id: String
+    - name: String
+    - type: BuildingType
+    - location: String
+    - scale: ProjectScale
+    - requirements: List<String>
+    - constraints: List<String>
+    - budget: Budget
+    - timeline: Timeline
+    --
+    + validate(): Boolean
+    + getType(): BuildingType
+    + addRequirement(req: String): void
+    + getConstraints(): List<String>
+    + updateBudget(budget: Budget): void
+    + setTimeline(timeline: Timeline): void
+}
+
+' 计划类
+class Plan {
+    - id: String
+    - content: String
+    - kpis: List<KPI>
+    - challenges: List<Challenge>
+    - solutions: List<Solution>
+    - timeline: Timeline
+    - budget: Budget
+    - status: PlanStatus
+    --
+    + exportToPDF(): PDF
+    + validate(): Boolean
+    + addKPI(kpi: KPI): void
+    + identifyChallenges(): List<Challenge>
+    + addSolution(solution: Solution): void
+    + updateStatus(status: PlanStatus): void
+}
+
+' 关键指标类
+class KPI {
+    - name: String
+    - type: KPIType
+    - targetValue: Double
+    - actualValue: Double
+    - unit: String
+    - priority: Priority
+    - description: String
+    --
+    + calculate(): Double
+    + isAchievable(): Boolean
+    + getDescription(): String
+    + compare(other: KPI): int
+    + updateTarget(value: Double): void
+}
+
+' 文档类
+class Document {
+    - id: String
+    - title: String
+    - content: String
+    - type: DocumentType
+    - version: String
+    - author: String
+    - createdDate: Date
+    - lastModified: Date
+    --
+    + exportToPDF(): PDF
+    + exportToWord(): WordDocument
+    + validate(): Boolean
+    + updateContent(content: String): void
+    + addSection(section: Section): void
+}
+
+' 语言模型接口
+interface LanguageModel {
+    + generateText(prompt: String): String
+    + analyzeText(text: String): Analysis
+    + translate(text: String, targetLang: String): String
+}
+
+' 数据库接口
+interface ProjectDatabase {
+    + findSimilarProjects(criteria: SearchCriteria): List<Project>
+    + saveProject(project: Project): void
+    + getProjectById(id: String): Project
+    + getProjectsByType(type: BuildingType): List<Project>
+}
+
+' 标准API接口
+interface StandardsAPI {
+    + getNationalStandards(buildingType: BuildingType): List<Standard>
+    + getLocalStandards(location: String): List<Standard>
+    + validateCompliance(project: Project): ComplianceReport
+}
+
+' 枚举类
+enum BuildingType {
+    RESIDENTIAL
+    COMMERCIAL
+    INDUSTRIAL
+    PUBLIC
+    EDUCATIONAL
+    HEALTHCARE
+}
+
+enum KPIType {
+    ENERGY_CONSUMPTION
+    SUSTAINABILITY
+    COMFORT
+    ECONOMIC
+    SAFETY
+    ENVIRONMENTAL
+}
+
+enum Priority {
+    LOW
+    MEDIUM
+    HIGH
+    CRITICAL
+}
+
+' 关系定义
+BuildingAISystem --> Project : processes
+BuildingAISystem --> Plan : generates
+BuildingAISystem --> Document : creates
+BuildingAISystem ..> LanguageModel : uses
+BuildingAISystem ..> ProjectDatabase : queries
+BuildingAISystem ..> StandardsAPI : consults
+
+Project --> Plan : "creates"
+Project --> BuildingType : "has type"
+Plan --> KPI : "contains"
+Plan --> Document : "produces"
+Document --> BuildingType : "applies to"
+KPI --> KPIType : "classified as"
+KPI --> Priority : "has priority"
+
+' 注释
+note top of BuildingAISystem
+    核心AI系统类
+    负责协调所有组件
+    实现智能决策功能
+end note
+
+note right of KPI
+    关键性能指标
+    支持多维度评估：
+    - 能耗性能
+    - 可持续性
+    - 舒适度
+    - 经济性
+    - 安全性
+end note
+
+note bottom of LanguageModel
+    大语言模型接口
+    支持自然语言处理
+    和智能对话生成
+end note
+
+@enduml

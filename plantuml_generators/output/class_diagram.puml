@@ -1,0 +1,35 @@
+@startuml
+!theme plain
+title 建筑AI系统类图
+
+class BuildingAISystem {
+    - llm_model: LanguageModel
+    - database: ProjectDatabase
+    - standards: StandardsAPI
+    --
+    + generatePlan(project: Project): Plan
+    + analyzeRequirements(input: String): Requirements
+}
+
+class Project {
+    - id: String
+    - type: String
+    - requirements: List<String>
+    --
+    + validate(): Boolean
+    + getType(): String
+}
+
+class Plan {
+    - content: String
+    - kpis: List<KPI>
+    - challenges: List<Challenge>
+    --
+    + export(): PDF
+    + validate(): Boolean
+}
+
+BuildingAISystem --> Project : processes
+BuildingAISystem --> Plan : generates
+Project --> Plan : creates
+@enduml

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>建筑AI工作流程图</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .code-section {
+            margin: 20px 0;
+        }
+        .code-block {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.4;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        .btn {
+            background: #3498db;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 25px;
+            display: inline-block;
+            margin: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .btn-copy {
+            background: #27ae60;
+        }
+        .btn-copy:hover {
+            background: #219a52;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 建筑AI工作流程图</h1>
+        
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="http://www.plantuml.com/plantuml/uml/" target="_blank" class="btn">
+                🌐 PlantUML在线编辑器
+            </a>
+            <button class="btn btn-copy" onclick="copyToClipboard()">
+                📋 复制代码
+            </button>
+        </div>
+        
+        <div class="code-section">
+            <h3>PlantUML代码：</h3>
+            <div class="code-block" id="plantuml-code">@startuml
+!theme plain
+title 建筑AI辅助策划与设计系统工作流程
+
+' 样式定义
+skinparam activity {
+    BackgroundColor lightblue
+    BorderColor black
+    FontSize 12
+}
+
+skinparam activityDiamond {
+    BackgroundColor lightyellow
+    BorderColor black
+}
+
+skinparam note {
+    BackgroundColor lightgreen
+    BorderColor darkgreen
+}
+
+start
+
+partition "数据输入阶段" {
+    :收集既往建筑项目策划书;
+    :收集项目任务书;
+    :获取国家建设标准;
+    :获取地方建设标准;
+}
+
+partition "AI分析处理阶段" {
+    :建筑大语言模型加载;
+    :多源数据融合分析;
+    :启动对话式交互;
+}
+
+partition "智能生成阶段" {
+    :快速生成策划书草案;
+    :生成设计任务书;
+    :识别关键性能指标;
+    :明确项目目标和需求;
+}
+
+partition "输出优化阶段" {
+    :为设计师提供清晰方向;
+    :识别技术挑战点;
+    :生成针对性解决方案;
+}
+
+partition "价值实现阶段" {
+    :降低认知负荷;
+    :提高工作效率;
+    :优化设计质量;
+}
+
+stop
+note top
+    系统通过AI技术整合多源建筑信息，实现智能化的项目策划与设计辅助
+end note
+@enduml</div>
+        </div>
+        
+        <div style="margin-top: 30px;">
+            <h3>使用说明：</h3>
+            <ol>
+                <li>点击"复制代码"按钮复制PlantUML代码</li>
+                <li>打开PlantUML在线编辑器</li>
+                <li>粘贴代码并查看生成的图表</li>
+                <li>可以导出为PNG、SVG等格式</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        function copyToClipboard() {
+            const codeElement = document.getElementById('plantuml-code');
+            const text = codeElement.textContent;
+            
+            navigator.clipboard.writeText(text).then(function() {
+                alert('代码已复制到剪贴板！');
+            }, function(err) {
+                console.error('复制失败: ', err);
+                // 备用复制方法
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                alert('代码已复制到剪贴板！');
+            });
+        }
+    </script>
+</body>
+</html>

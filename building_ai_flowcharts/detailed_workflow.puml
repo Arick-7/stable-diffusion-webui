@@ -1,0 +1,170 @@
+@startuml
+!theme plain
+title 建筑AI辅助设计系统详细工作流程
+
+' 样式定义
+skinparam activity {
+    BackgroundColor #E1F5FE
+    BorderColor #0277BD
+    FontSize 11
+}
+
+skinparam activityDiamond {
+    BackgroundColor #FFF3E0
+    BorderColor #F57C00
+}
+
+skinparam partition {
+    BorderColor #424242
+    FontSize 12
+    FontStyle bold
+}
+
+start
+
+' 数据准备阶段
+partition "**数据准备与预处理**" #LIGHTBLUE {
+    :用户上传项目基本信息;
+    
+    fork
+        :加载既往策划书数据库;
+        note right: 结构化存储的历史项目数据
+    fork again
+        :加载任务书模板库;
+        note right: 标准化的任务书格式
+    fork again
+        :调用国家标准API;
+        note right: 实时获取最新标准
+    fork again
+        :调用地方标准数据库;
+        note right: 地区特定的建设要求
+    end fork
+    
+    :数据预处理与标准化;
+    note right: 统一数据格式，清洗无效信息
+}
+
+' AI模型处理
+partition "**AI智能分析**" #LIGHTGREEN {
+    :初始化建筑大语言模型;
+    note right: 加载预训练的专业模型
+    
+    :项目类型识别与分类;
+    if (项目类型明确?) then (是)
+        :匹配相应的标准模板;
+    else (否)
+        :启动类型识别对话;
+        :用户确认项目类型;
+    endif
+    
+    :多维度需求分析;
+    note right
+        - 功能需求分析
+        - 技术需求评估
+        - 法规合规检查
+        - 经济可行性预判
+    end note
+}
+
+' 对话交互阶段
+partition "**智能对话生成**" #LIGHTYELLOW {
+    repeat
+        :生成针对性问题;
+        note right: 基于缺失信息生成问题
+        
+        :用户回答问题;
+        
+        :更新项目需求模型;
+        
+        if (信息完整度检查) then (>=80%)
+            :确认进入生成阶段;
+        else (<80%)
+            :继续收集信息;
+        endif
+    repeat while (信息完整?) is (否)
+}
+
+' 文档生成阶段
+partition "**文档智能生成**" #LIGHTCORAL {
+    fork
+        :生成项目策划书;
+        note right
+            - 项目背景与目标
+            - 技术路线规划
+            - 资源配置方案
+            - 风险评估预案
+        end note
+    fork again
+        :生成设计任务书;
+        note right
+            - 设计要求详述
+            - 技术标准清单
+            - 质量控制要点
+            - 交付成果规范
+        end note
+    end fork
+}
+
+' 性能指标识别
+partition "**关键指标识别**" #LIGHTSTEELBLUE {
+    :能耗性能分析;
+    note right: 建筑能效等级预测
+    
+    :可持续性评估;
+    note right: 绿色建筑认证可行性
+    
+    :舒适度指标设定;
+    note right: 室内环境质量标准
+    
+    :经济性指标计算;
+    note right: 成本效益分析
+    
+    :安全性能要求;
+    note right: 结构安全与消防安全
+}
+
+' 输出优化
+partition "**输出优化与验证**" #LAVENDER {
+    :技术挑战识别;
+    note right: 预判设计难点和技术风险
+    
+    :解决方案推荐;
+    note right: 基于经验库的解决策略
+    
+    :文档质量检查;
+    if (质量达标?) then (是)
+        :生成最终文档;
+    else (否)
+        :返回优化建议;
+        backward :重新生成;
+    endif
+}
+
+' 交付阶段
+partition "**成果交付**" #LIGHTPINK {
+    :生成项目策划书PDF;
+    :生成设计任务书PDF;
+    :生成关键指标清单;
+    :生成技术挑战应对方案;
+    
+    :降低设计师认知负荷;
+    note right
+        - 减少信息搜集时间
+        - 提供结构化指导
+        - 预判技术风险
+    end note
+}
+
+stop
+
+' 系统价值说明
+note bottom
+    **系统核心价值：**
+    1. 快速响应：通过AI对话快速明确需求
+    2. 标准合规：确保符合国家和地方标准
+    3. 经验复用：利用历史项目经验
+    4. 智能预判：提前识别技术挑战
+    5. 减负增效：降低认知负荷，提高效率
+end note
+
+@enduml

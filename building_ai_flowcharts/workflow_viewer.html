@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>建筑AI工作流程图查看器</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        .description {
+            background: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            line-height: 1.6;
+        }
+        .workflow-section {
+            margin: 30px 0;
+        }
+        .workflow-section h2 {
+            color: #34495e;
+            border-left: 4px solid #3498db;
+            padding-left: 10px;
+        }
+        .plantuml-link {
+            background: #3498db;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            margin: 10px 5px;
+        }
+        .plantuml-link:hover {
+            background: #2980b9;
+        }
+        .code-block {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+        .analysis {
+            background: #e8f6f3;
+            border-left: 4px solid #1abc9c;
+            padding: 15px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏗️ 建筑AI辅助策划与设计系统工作流程图</h1>
+        
+        <div class="description">
+            <h3>📋 原始需求描述：</h3>
+            <p>AI可以基于既往建筑项目的策划书、任务书，以及国家和地方对特定类型建筑项目的建设标准，利用建筑大语言模型。通过对话形式，快速产出策划与设计任务书，这有助于更迅速地明确项目目标和需求。同时可识别关键性能指标，例如能耗、可持续性、舒适度等，对设计师更好地理解项目的特点，为后续设计提供清晰的方向，有针对性的面对技术挑战提供了高效的协助功能，从这个角度看也能大幅度降低人在信息收集和初期处理阶段的认知负荷。</p>
+        </div>
+
+        <div class="analysis">
+            <h3>🔍 流程分析结果：</h3>
+            <ul>
+                <li><strong>输入源：</strong>既往策划书、任务书、国家标准、地方标准</li>
+                <li><strong>核心技术：</strong>建筑大语言模型 + 对话式交互</li>
+                <li><strong>主要功能：</strong>智能生成策划书和设计任务书</li>
+                <li><strong>关键指标：</strong>能耗、可持续性、舒适度等性能参数</li>
+                <li><strong>核心价值：</strong>降低认知负荷、提高效率、预判技术挑战</li>
+            </ul>
+        </div>
+
+        <div class="workflow-section">
+            <h2>📊 在线查看流程图</h2>
+            <p>点击下面的链接在PlantUML在线编辑器中查看和编辑流程图：</p>
+            
+            <a href="http://www.plantuml.com/plantuml/uml/" target="_blank" class="plantuml-link">
+                🌐 PlantUML在线编辑器
+            </a>
+            
+            <a href="https://plantuml-editor.kkeisuke.com/" target="_blank" class="plantuml-link">
+                ✏️ 替代在线编辑器
+            </a>
+        </div>
+
+        <div class="workflow-section">
+            <h2>📁 生成的文件</h2>
+            <ul>
+                <li><code>basic_workflow.puml</code> - 基础工作流程图</li>
+                <li><code>detailed_workflow.puml</code> - 详细工作流程图</li>
+                <li><code>workflow_viewer.html</code> - 本查看器文件</li>
+            </ul>
+        </div>
+
+        <div class="workflow-section">
+            <h2>🚀 使用说明</h2>
+            <ol>
+                <li>复制下方的PlantUML代码</li>
+                <li>打开PlantUML在线编辑器</li>
+                <li>粘贴代码并查看生成的流程图</li>
+                <li>可以根据需要修改和定制流程图</li>
+            </ol>
+        </div>
+
+        <div class="workflow-section">
+            <h2>💡 扩展建议</h2>
+            <ul>
+                <li><strong>数据库集成：</strong>建立标准化的项目数据库</li>
+                <li><strong>模型优化：</strong>针对建筑领域进行模型微调</li>
+                <li><strong>用户界面：</strong>开发友好的Web界面</li>
+                <li><strong>质量控制：</strong>添加专家审核环节</li>
+                <li><strong>版本管理：</strong>支持文档版本控制</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // 添加一些交互功能
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('建筑AI工作流程图查看器已加载');
+        });
+    </script>
+</body>
+</html>

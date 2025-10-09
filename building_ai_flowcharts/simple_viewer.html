@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>建筑AI工作流程图</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            margin: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+        .plantuml-viewer {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .plantuml-link {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 25px;
+            display: inline-block;
+            margin: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        .plantuml-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .code-section {
+            margin: 30px 0;
+        }
+        .code-section h3 {
+            color: #34495e;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        .code-block {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            line-height: 1.4;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .copy-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        .copy-btn:hover {
+            background: #219a52;
+        }
+        .analysis {
+            background: linear-gradient(135deg, #e8f6f3, #d5f4e6);
+            border-left: 5px solid #1abc9c;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏗️ 建筑AI辅助策划与设计系统流程图</h1>
+        
+        <div class="analysis">
+            <h3>📊 流程分析结果</h3>
+            <p><strong>核心流程包含6个主要阶段：</strong></p>
+            <ol>
+                <li><strong>数据输入阶段：</strong>收集既往项目资料、任务书、国家和地方标准</li>
+                <li><strong>AI分析处理：</strong>大语言模型加载和数据融合分析</li>
+                <li><strong>智能生成阶段：</strong>生成策划书、任务书和关键指标</li>
+                <li><strong>输出优化阶段：</strong>提供设计方向和技术挑战解决方案</li>
+                <li><strong>价值实现阶段：</strong>降低认知负荷，提高工作效率</li>
+            </ol>
+        </div>
+
+        <div class="plantuml-viewer">
+            <h3>🌐 在线查看流程图</h3>
+            <p>点击下面的按钮在PlantUML在线编辑器中查看流程图：</p>
+            
+            <a href="http://www.plantuml.com/plantuml/uml/" target="_blank" class="plantuml-link">
+                📈 基础流程图在线查看
+            </a>
+            
+            <a href="https://plantuml-editor.kkeisuke.com/" target="_blank" class="plantuml-link">
+                📊 详细流程图在线查看
+            </a>
+        </div>
+
+        <div class="code-section">
+            <h3>📋 基础流程图代码</h3>
+            <button class="copy-btn" onclick="copyToClipboard('basic-code')">复制代码</button>
+            <div class="code-block" id="basic-code">@startuml
+!theme plain
+title 建筑AI辅助策划与设计系统工作流程
+
+start
+
+partition "数据输入阶段" {
+    :收集既往建筑项目策划书;
+    :收集项目任务书;
+    :获取国家建设标准;
+    :获取地方建设标准;
+}
+
+partition "AI分析处理阶段" {
+    :建筑大语言模型加载;
+    :多源数据融合分析;
+    if (数据完整性检查) then (完整)
+        :启动对话式交互;
+    else (不完整)
+        :请求补充信息;
+        stop
+    endif
+}
+
+partition "智能生成阶段" {
+    :快速生成策划书草案;
+    :生成设计任务书;
+    :识别关键性能指标;
+    :明确项目目标和需求;
+}
+
+partition "输出优化阶段" {
+    :为设计师提供清晰方向;
+    :识别技术挑战点;
+    :生成针对性解决方案;
+}
+
+partition "价值实现阶段" {
+    :降低认知负荷;
+    :提高工作效率;
+    :优化设计质量;
+}
+
+stop
+@enduml</div>
+        </div>
+
+        <div class="code-section">
+            <h3>🔧 使用说明</h3>
+            <ol>
+                <li>复制上面的PlantUML代码</li>
+                <li>打开 <a href="http://www.plantuml.com/plantuml/uml/" target="_blank">PlantUML在线编辑器</a></li>
+                <li>将代码粘贴到编辑器中</li>
+                <li>点击"Submit"按钮生成流程图</li>
+                <li>可以导出为PNG、SVG等格式</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        function copyToClipboard(elementId) {
+            const element = document.getElementById(elementId);
+            const text = element.textContent;
+            
+            navigator.clipboard.writeText(text).then(function() {
+                alert('代码已复制到剪贴板！');
+            }, function(err) {
+                console.error('复制失败: ', err);
+            });
+        }
+    </script>
+</body>
+</html>
